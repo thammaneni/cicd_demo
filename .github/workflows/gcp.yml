@@ -24,8 +24,9 @@ jobs:
       run: docker build -t $IMAGE_NAME:latest .
 
     - name: Configure Docker Client
-      run: |-
-        gcloud auth activate-service-account github-actions@cicddemo-381608.iam.gserviceaccount.com --key-file=${{ vars.SERVICE_ACCOUNT_KEY }}
+      run: |-        
+        echo "${{ vars.SERVICE_ACCOUNT_KEY }}" > KEY_FILE.json
+        gcloud auth activate-service-account github-actions@cicddemo-381608.iam.gserviceaccount.com --key-file=KEY_FILE.json
         gcloud auth configure-docker --quiet
         gcloud auth configure-docker asia-south1-docker.pkg.dev --quiet
         gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin http://asia-south1-docker.pkg.dev
