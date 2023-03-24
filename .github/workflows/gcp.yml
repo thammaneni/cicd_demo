@@ -25,6 +25,7 @@ jobs:
 
     - name: Configure Docker Client
       run: |-
+        cat service_account_key
         echo service_account_key > KEY_FILE.json
         gcloud auth activate-service-account github-actions@cicddemo-381608.iam.gserviceaccount.com --key-file=KEY_FILE.json
         gcloud auth configure-docker --quiet
